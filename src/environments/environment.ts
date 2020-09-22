@@ -11,7 +11,7 @@ import { KeycloakConfig } from 'keycloak-angular';
 
 export const environment = {
   production: false,
-  baseUrl: "http://13.234.254.213:32001/gitfocus/"
+  baseUrl: "http://a01175058eeff488ca34301bfce3e6b7-960362263.ap-south-1.elb.amazonaws.com:8888/gitfocus/"
   //baseUrl: "http://localhost:8888/gitfocus/",
   //baseUrl: "http://localhost:2100/gitfocus/",
   //baseUrl: "http://ec2-13-126-135-17.ap-south-1.compute.amazonaws.com:2100/gitfocus/"
