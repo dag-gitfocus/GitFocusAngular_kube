@@ -6,9 +6,10 @@ pipeline {
         stage('Restore') {
             steps {
                 sh 'npm install'
+                sh 'cp  index.d.ts ./node_modules/@types/chart.js'
             }
         }
-        stage('Build') {
+        /*stage('Build') {
             steps {
                 sh 'npm run-script build'
             }
@@ -23,6 +24,6 @@ pipeline {
                 sh 'rm ../../apps/*'
                 sh 'cp ./dist/apps/* ../../apps/'
             }
-        }             
+        } */            
     }
 }
