@@ -27,12 +27,15 @@ pipeline {
         }
         stage('Building Image') {
             steps {
+                nodejs('DAGNodeJS'){
+                   sh 'node -v'
                    sh 'pwd'
                    sh 'ls -l'                   
                     script {
                                dockerImage = docker.build registry + ":$BUILD_NUMBER"
                                //dockerImage = docker.build registry + ":1.1"
                      }
+                }
             }
         }      
         /*stage('Deploy') {
