@@ -9,12 +9,12 @@ pipeline {
                 sh 'cp  index.d.ts ./node_modules/@types/chart.js'
             }
         }
-        /*stage('Build') {
+        stage('Build') {
             steps {
                 sh 'npm run-script build'
             }
         }
-        stage('Test') {
+       /* stage('Test') {
             steps {
                 sh 'ng run-script test'
             }
