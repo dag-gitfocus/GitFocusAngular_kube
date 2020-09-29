@@ -29,6 +29,7 @@ pipeline {
             steps {
                 nodejs('DAGNodeJS'){
                    sh 'node -v'
+                   sh 'which node; which npm'
                    sh 'pwd'
                    sh 'ls -l'                   
                     script {
