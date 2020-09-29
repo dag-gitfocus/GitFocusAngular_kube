@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sh 'rm ../../apps/*'
                 sh 'cp ./dist/apps/* ../../apps/'
-            }*/
-        }            
+            }
+        }*/           
     }
 }
