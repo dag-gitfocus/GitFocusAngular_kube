@@ -31,7 +31,8 @@ pipeline {
                    sh 'node -v'
                    sh 'which node; which npm'
                    sh 'pwd'
-                   sh 'ls -l'                   
+                   sh 'ls -l'    
+                   npm install
                     script {
                                dockerImage = docker.build registry + ":$BUILD_NUMBER"
                                //dockerImage = docker.build registry + ":1.1"
