@@ -25,7 +25,7 @@ pipeline {
                 sh 'rm -f browserslist tsconfig.app.json README.md package-lock.json  tsconfig.json angular.json  tsconfig.spec.json karma.conf.js  tslint.json index.d.ts package.json'
             }
         }
-        /*stage('Building Image') {
+        stage('Building Image') {
             steps {
                    sh 'pwd'
                    sh 'ls -l'                   
@@ -35,7 +35,7 @@ pipeline {
                      }
             }
         }      
-        stage('Deploy') {
+        /*stage('Deploy') {
             steps {
                
                 sh 'cp ./dist/* ../../GitAngular/'
