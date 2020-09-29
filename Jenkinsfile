@@ -4,7 +4,6 @@ pipeline {
     registryCredential = 'GITFocus-DockerHub'
     dockerImage = ''
   }
-   agent any
    agent {
        docker { image 'node' }
     }
