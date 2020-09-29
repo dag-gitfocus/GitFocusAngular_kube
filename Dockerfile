@@ -1,3 +1,3 @@
 FROM node
+USER root
 EXPOSE 4200
-CMD [ "node", "app.js" ]
