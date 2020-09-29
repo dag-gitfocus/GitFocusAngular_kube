@@ -4,10 +4,10 @@ pipeline {
     registryCredential = 'GITFocus-DockerHub'
     dockerImage = ''
   }
-   agent {
-       any
-       // docker { image 'node:10-alpine' }
-    }
+   agent any
+   /*agent {
+       docker { image 'node:10-alpine' }
+    }*/
     stages {
         stage('Restore') {
             steps {
