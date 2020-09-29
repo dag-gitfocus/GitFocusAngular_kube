@@ -29,9 +29,10 @@ pipeline {
             steps {
                    sh 'pwd'
                    sh 'ls -l'
+                   sh 'cd ..'
                    sh 'cd GitFocus-Angular@tmp'
                    sh 'ls -l'
-                   sh 'cd ..' 
+                   sh 'cd ..'
                     script {
                                dockerImage = docker.build registry + ":$BUILD_NUMBER"
                                //dockerImage = docker.build registry + ":1.1"
