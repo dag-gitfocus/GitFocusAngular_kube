@@ -4,9 +4,9 @@ pipeline {
     registryCredential = 'GITFocus-DockerHub'
     dockerImage = ''
   }
-    agent {
+  /*  agent {
         docker { image 'node:10-alpine' }
-    }
+    }*/
     stages {
         stage('Restore') {
             steps {
@@ -25,7 +25,7 @@ pipeline {
                 sh 'rm -f browserslist tsconfig.app.json README.md package-lock.json  tsconfig.json angular.json  tsconfig.spec.json karma.conf.js  tslint.json index.d.ts package.json'
             }
         }
-        stage('Building Image') {
+        /*stage('Building Image') {
             steps {
                    sh 'pwd'
                    sh 'ls -l'                   
@@ -34,12 +34,12 @@ pipeline {
                                //dockerImage = docker.build registry + ":1.1"
                      }
             }
-        }        
-        /*stage('Deploy') {
+        }      
+        stage('Deploy') {
             steps {
-                sh 'rm ../../apps/*'
-                sh 'cp ./dist/apps/* ../../apps/'
+               
+                sh 'cp ./dist/* ../../GitAngular/'
             }
-        }*/           
+        } */          
     }
 }
