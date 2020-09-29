@@ -26,7 +26,12 @@ pipeline {
             }
         }
         stage('Building Image') {
-            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+            steps {
+                    script {
+                               dockerImag = docker.build registry + ":$BUILD_NUMBER"
+                               //dockerImage = docker.build registry + ":1.1"
+                     }
+            }
         }        
         /*stage('Deploy') {
             steps {
