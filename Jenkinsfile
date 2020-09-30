@@ -96,7 +96,8 @@ pipeline {
                                      pattern {
                                                 type('INCLUDE')
                                                 pattern('.gitignore')
-                          }
+                                     }
+		          }
 		  }
 	           emailext body:'''${DEFAULT_CONTENT}''',
                             recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
