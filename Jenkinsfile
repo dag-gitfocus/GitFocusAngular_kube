@@ -32,6 +32,7 @@ pipeline {
 	            withSonarQubeEnv('SonarQube') {	            
 	            //sh "${scannerHome}/bin/sonar-scanner"
 	            sh 'pwd'
+	            sh 'cp sonar-scanner.properties ../var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
 		    sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'
 	            //sh '{tool('DAGSonarScanner')}/bin/sonar-scanner'		   
 		   }
@@ -63,7 +64,7 @@ pipeline {
     }
     post {
     always {
-    	     cleanWs()        
+    	     //cleanWs()        
 	        /* emailext body:'''${DEFAULT_CONTENT}''',
                       recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                       subject:''' ${DEFAULT_SUBJECT}'''*/
