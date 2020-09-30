@@ -9,7 +9,7 @@ pipeline {
     maven 'maven 3.6.3'
    }
     stages {
-        stage('Initialize'){
+        /*stage('Initialize'){
             steps {
                     nodejs('DAGNodeJS'){
                           sh 'npm install'
@@ -23,7 +23,7 @@ pipeline {
                         sh 'npm run-script build'
                     }
             }
-        }
+        }*/
 	stage ("Code Analysis") {	   
             steps {	
 		    script{
@@ -38,6 +38,7 @@ pipeline {
 		   }
             }
         }
+	/*
         stage('Building Image') {
             steps {
                    script {
@@ -62,7 +63,7 @@ pipeline {
              }
         }
     }
-   /* post {
+    post {
     always {
     	     //cleanWs()        
 	         emailext body:'''${DEFAULT_CONTENT}''',
@@ -70,4 +71,5 @@ pipeline {
                       subject:''' ${DEFAULT_SUBJECT}'''
     }
   }*/
+    }
 }
