@@ -32,7 +32,7 @@ pipeline {
         }
 	stage ("Code Analysis") {
             steps {
-		    def scannerHome = tool 'DAGSonarQubeScanner'
+		    //def scannerHome = tool 'DAGSonarQubeScanner'
 	            withSonarQubeEnv('SonarQube') {
 	            sh "mvn sonar:sonar -Dsonar.projectKey=GitFocus-Angular"
 	            //sh "${scannerHome}/bin/sonar-scanner"
