@@ -8,6 +8,7 @@ pipeline {
    stages {
         stage('Initialize'){
             steps {
+		    echo 'the build worked! The payload is $payload'
                     nodejs('DAGNodeJS'){
                           sh 'npm install'
                           sh 'cp  index.d.ts ./node_modules/@types/chart.js'
