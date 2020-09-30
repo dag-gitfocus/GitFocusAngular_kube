@@ -24,12 +24,11 @@ pipeline {
                     }
             }
         }
-	stage ("Code Analysis") {
-	scannerHome = tool 'DAGSonarQubeScanner'
+	stage ("Code Analysis") {	
             steps {		    
-	            withSonarQubeEnv('SonarQube') {
-	            sh "mvn sonar:sonar -Dsonar.projectKey=GitFocus-Angular"
+	            withSonarQubeEnv('SonarQube') {	            
 	            //sh "${scannerHome}/bin/sonar-scanner"
+	            sh "/opt/sonar-scanner/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
 		   }
             }
         }
