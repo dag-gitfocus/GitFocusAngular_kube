@@ -29,7 +29,16 @@ pipeline {
                             //dockerImage = docker.build registry + ":1.1"
                    }
             }           
-        } 
+        }
+	stage ("Code Analysis") {
+            steps {
+		    def scannerHome = tool 'DAGSonarQubeScanner'
+	            withSonarQubeEnv('SonarQube') {
+	            sh "mvn sonar:sonar -Dsonar.projectKey=GitFocus-Angular"
+	            //sh "${scannerHome}/bin/sonar-scanner"
+		   }
+            }
+        }
         stage('Clean Up'){
             steps {
                 sh 'rm -r src output  e2e'
