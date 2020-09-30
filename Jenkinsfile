@@ -31,7 +31,9 @@ pipeline {
 		    }
 	            withSonarQubeEnv('SonarQube') {	            
 	            //sh "${scannerHome}/bin/sonar-scanner"
-	            sh '${scannerHome}/bin/sonar-scanner'
+	            sh 'pwd'
+		    sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'
+	            sh '${tool('DAGSonarScanner')}/bin/sonar-scanner'		   
 		   }
             }
         }
