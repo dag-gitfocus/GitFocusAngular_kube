@@ -4,12 +4,10 @@ pipeline {
     registryCredential = 'GITFocus-DockerHub'
     dockerImage = ''
   }
-   agent any 
-   tools { 
-    maven 'maven 3.6.3'
-   }
+   agent any
+	
     stages {
-        /*stage('Initialize'){
+        stage('Initialize'){
             steps {
                     nodejs('DAGNodeJS'){
                           sh 'npm install'
@@ -23,18 +21,16 @@ pipeline {
                         sh 'npm run-script build'
                     }
             }
-        }*/
+        }
 	stage ("Code Analysis") {	   
             steps {	
 		    script{
 			    def scannerHome = tool 'DAGSonarScanner'
 		    }
-	            withSonarQubeEnv('SonarQube') {	            
-	            //sh "${scannerHome}/bin/sonar-scanner"
+	            withSonarQubeEnv('SonarQube') {            
 	            sh 'pwd'
 	            sh 'cp sonar-scanner.properties /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
-		    sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'
-	            //sh '{tool('DAGSonarScanner')}/bin/sonar-scanner'		   
+		    sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'	            		   
 		   }
             }
         }
@@ -47,9 +43,8 @@ pipeline {
 			   }
 	     	    }
             }
-    }   
-	/*
-        stage('Building Image') {
+       }
+       stage('Building Image') {
             steps {
                    script {
                             dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -62,6 +57,16 @@ pipeline {
                 sh 'rm -r src output  e2e'
                 sh 'rm -f browserslist tsconfig.app.json README.md tsconfig.json angular.json  tsconfig.spec.json karma.conf.js  tslint.json index.d.ts'
             }
+        }
+	stage('Approval') {            
+            steps {
+                script {
+		    timeout (time: 2, unit: 'MINUTES') {
+                    def deploymentDelay = input id: 'Deploy', message: 'Push Image to DockerHub?', submitter: 'admin', parameters: [choice(choices: ['0', '1', '2', '3'], description: 'Hours to delay deployment?', name: 'deploymentDelay')]
+                    sleep time: deploymentDelay.toInteger(), unit: 'HOURS'
+		    }
+                }
+            }    
         }
         stage('Push to DockerHub') {
             steps{
@@ -79,7 +84,5 @@ pipeline {
 	         emailext body:'''${DEFAULT_CONTENT}''',
                       recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                       subject:''' ${DEFAULT_SUBJECT}'''
-    }
-  }*/
-    }
+    }  
 }
