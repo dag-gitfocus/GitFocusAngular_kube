@@ -30,13 +30,12 @@ pipeline {
                 nodejs('DAGNodeJS'){
                    sh 'node -v'
                    sh 'which node; which npm'
-                   sh 'pwd'
-                   sh 'ls -l'    
-                   sh 'npm install'
-                    script {
+                   sh 'docker build --tag gitfocus:1.0'
+                   sh 'ls -l'
+                    /*script {
                                dockerImage = docker.build registry + ":$BUILD_NUMBER"
                                //dockerImage = docker.build registry + ":1.1"
-                     }
+                     }*/
                 }
             }
         }      
