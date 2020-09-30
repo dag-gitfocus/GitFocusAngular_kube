@@ -79,16 +79,7 @@ pipeline {
     }
     post {
           always {
-		  cleanWs{
-			  cleanWhenAborted(true)
-                          cleanWhenFailure(true)
-                          cleanWhenNotBuilt(false)
-                          cleanWhenSuccess(true)
-                          cleanWhenUnstable(true)
-                          deleteDirs(true)
-                          notFailBuild(true)
-                          disableDeferredWipeout(true)                         
-		  }
+		  cleanWs()
 	           emailext body:'''${DEFAULT_CONTENT}''',
                             recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                             subject:''' ${DEFAULT_SUBJECT}'''
