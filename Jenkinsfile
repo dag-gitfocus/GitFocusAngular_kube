@@ -6,7 +6,8 @@ pipeline {
   }
    agent any 
    tools { 
-    maven 'maven 3.6.3' 
+    maven 'maven 3.6.3'
+    sonarQube 'DAGSonarQubeScanner'
    }
     stages {
         stage('Initialize'){
@@ -24,12 +25,14 @@ pipeline {
                     }
             }
         }
-	stage ("Code Analysis") {
-		def scannerHome = tool 'SonarQube Scanner 2.8';
-            steps {		    
+	stage ("Code Analysis") {	   
+            steps {	
+		    script{
+			    def scannerHome = tool 'DAGSonarQubeScanner'
+		    }
 	            withSonarQubeEnv('SonarQube') {	            
 	            //sh "${scannerHome}/bin/sonar-scanner"
-	            sh "/opt/sonar-scanner/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+	            sh '${scannerHome}/bin/sonar-scanner'
 		   }
             }
         }
