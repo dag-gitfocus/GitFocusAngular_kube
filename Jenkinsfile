@@ -78,10 +78,11 @@ pipeline {
         }
     }
     post {
-    always {
-    	     cleanWs()        
-	     emailext body:'''${DEFAULT_CONTENT}''',
-                      recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                      subject:''' ${DEFAULT_SUBJECT}'''
-    }  
+          always {
+    	           cleanWs()        
+	           emailext body:'''${DEFAULT_CONTENT}''',
+                            recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                            subject:''' ${DEFAULT_SUBJECT}'''
+         }  
+   }
 }
