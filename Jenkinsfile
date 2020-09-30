@@ -7,12 +7,20 @@ pipeline {
    agent any 
     
     stages {
+        stage('Initialize'){
+            steps {
+                    nodejs('DAGNodeJS'){
+                          sh 'npm install'
+                          sh 'cp  index.d.ts ./node_modules/@types/chart.js'
+                    }
+            }
+        }
         stage('Building Image') {
             steps {
-                     script {
-                               dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                               //dockerImage = docker.build registry + ":1.1"
-                     }
+                   script {
+                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                            //dockerImage = docker.build registry + ":1.1"
+                   }
             }           
         }              
     }
