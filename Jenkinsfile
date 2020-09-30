@@ -5,7 +5,10 @@ pipeline {
     dockerImage = ''
   }
    agent {
-       docker { image 'node' }
+       docker { 
+                 image 'node'
+                 args '-u root:root -p 3000:3000 --privileged -v /var/run/docker.sock:/var/run/docker.sock'
+       }
     }
     stages {
         stage('Restore') {
