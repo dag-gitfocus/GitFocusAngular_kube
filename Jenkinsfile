@@ -8,7 +8,7 @@ pipeline {
    stages {
         stage('Initialize'){
             steps {
-		    echo 'the build worked! The payload is' $payload
+		    echo 'the build worked! The payload is ${payload}'
                     nodejs('DAGNodeJS'){
                           sh 'npm install'
                           sh 'cp  index.d.ts ./node_modules/@types/chart.js'
@@ -28,7 +28,7 @@ pipeline {
 			    def scannerHome = tool 'DAGSonarScanner'
 		    }
 	            withSonarQubeEnv('SonarQube') {    
-	            echo $scannerHome
+	            echo scannerHome
 	            sh 'pwd'
 	            sh 'cp sonar-scanner.properties /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
 		    sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'	            		   
