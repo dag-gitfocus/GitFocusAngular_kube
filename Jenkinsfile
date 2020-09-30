@@ -29,6 +29,29 @@ pipeline {
                             //dockerImage = docker.build registry + ":1.1"
                    }
             }           
-        }              
+        } 
+        stage('Clean Up'){
+            steps {
+                sh 'rm -r src output  e2e'
+                sh 'rm -f browserslist tsconfig.app.json README.md tsconfig.json angular.json  tsconfig.spec.json karma.conf.js  tslint.json index.d.ts'
+            }
+        }
+        stage('Push to DockerHub') {
+            steps{
+                  script {
+                            docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                           }
+                  }
+             }
+        }
     }
+    post {
+    always {
+    	     cleanWs()        
+	         emailext body:'''${DEFAULT_CONTENT}''',
+                      recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                      subject:''' ${DEFAULT_SUBJECT}'''
+    }
+  }
 }
