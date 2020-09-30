@@ -5,7 +5,9 @@ pipeline {
     dockerImage = ''
   }
    agent any 
-    
+   tools { 
+    maven 'maven 3.6.3' 
+   }
     stages {
         stage('Initialize'){
             steps {
@@ -22,14 +24,6 @@ pipeline {
                     }
             }
         }
-        stage('Building Image') {
-            steps {
-                   script {
-                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                            //dockerImage = docker.build registry + ":1.1"
-                   }
-            }           
-        }
 	stage ("Code Analysis") {
             steps {
 		    //def scannerHome = tool 'DAGSonarQubeScanner'
@@ -39,6 +33,14 @@ pipeline {
 		   }
             }
         }
+        stage('Building Image') {
+            steps {
+                   script {
+                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                            //dockerImage = docker.build registry + ":1.1"
+                   }
+            }           
+        }	
         stage('Clean Up'){
             steps {
                 sh 'rm -r src output  e2e'
