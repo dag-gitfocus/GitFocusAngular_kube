@@ -87,17 +87,7 @@ pipeline {
                           cleanWhenUnstable(true)
                           deleteDirs(true)
                           notFailBuild(true)
-                          disableDeferredWipeout(true)
-                          patterns {
-                                     pattern {
-                                                type('EXCLUDE')
-                                                pattern('.propsfile')
-                                     }
-                                     pattern {
-                                                type('INCLUDE')
-                                                pattern('.gitignore')
-                                     }
-		          }
+                          disableDeferredWipeout(true)                         
 		  }
 	           emailext body:'''${DEFAULT_CONTENT}''',
                             recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
