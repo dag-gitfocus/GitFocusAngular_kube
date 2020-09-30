@@ -4,9 +4,8 @@ pipeline {
     registryCredential = 'GITFocus-DockerHub'
     dockerImage = ''
   }
-   agent any
-	
-    stages {
+   agent any	
+   stages {
         stage('Initialize'){
             steps {
                     nodejs('DAGNodeJS'){
