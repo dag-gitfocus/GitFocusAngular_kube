@@ -15,6 +15,13 @@ pipeline {
                     }
             }
         }
+        stage('Build') {
+            steps {
+                    nodejs('DAGNodeJS'){
+                        sh 'npm run-script build'
+                    }
+            }
+        }
         stage('Building Image') {
             steps {
                    script {
