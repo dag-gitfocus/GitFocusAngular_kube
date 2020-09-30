@@ -27,7 +27,7 @@ pipeline {
 	stage ("Code Analysis") {	   
             steps {	
 		    script{
-			    def scannerHome = tool 'DAGSonarQubeScanner'
+			    def scannerHome = tool 'DAGSonarScanner'
 		    }
 	            withSonarQubeEnv('SonarQube') {	            
 	            //sh "${scannerHome}/bin/sonar-scanner"
