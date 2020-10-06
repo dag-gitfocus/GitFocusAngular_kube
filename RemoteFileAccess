@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('SSH Declarative') {
+        stage('Deploy in Cluster') {
             steps {
                  script {
                      withCredentials([sshUserPrivateKey(credentialsId: 'AWSK8', keyFileVariable: 'keyFile', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
@@ -19,5 +19,13 @@ pipeline {
                  }
             }
         }
+    }
+    post {
+          always {
+	          cleanWs() 
+		   /*emailext body:'''${DEFAULT_CONTENT}''',
+                            recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                            subject:''' ${DEFAULT_SUBJECT}'''*/
+         }  
     }
 }
