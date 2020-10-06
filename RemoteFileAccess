@@ -11,7 +11,7 @@ pipeline {
                      def remote = [name: 'K8 Cluster Invoke', host: 'ec2-13-53-42-78.eu-north-1.compute.amazonaws.com', identityFile : keyFile, user: 'ubuntu', allowAnyHosts: true]
                      sh 'ls -l'
                      sshCommand remote: remote, command: "ls -l"   
-                     sshPut remote: remote, from: '.', into: '.'
+                     sshPut remote: remote, from: './GitFocusAngularBuildFile', into: '/gitfocusapp'
                      }
                  }
             }
