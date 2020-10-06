@@ -33,7 +33,7 @@ pipeline {
            }
            stage ("Deployment") {
                steps {
-	                    build 'K8Test'
+	                    build 'RemoteAccessTest'
                 }  
           } 
    }
