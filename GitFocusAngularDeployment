@@ -11,9 +11,14 @@ pipeline {
   }	
  
   stages {
-          stage ("Build Service") {
+          stage ("Build Project") {
                steps {
 	                    build 'GitFocus-Angular-Build'
+                }  
+          } 
+	  stage ("Push Image") {
+               steps {
+	                    build 'GitFocus-Angular-BuildImage'
                 }  
           }  
           stage('Approval') {            
@@ -31,5 +36,13 @@ pipeline {
 	                    build 'K8Test'
                 }  
           } 
+   }
+    post {
+          always {
+		  cleanWs()
+	           /*emailext body:'''${DEFAULT_CONTENT}''',
+                           recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                           subject:''' ${DEFAULT_SUBJECT}'''*/
+         }  
    }
 }
