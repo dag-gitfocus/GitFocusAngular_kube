@@ -6,44 +6,7 @@ pipeline {
   }
    agent any	
    stages {
-        stage('Initialize'){
-            steps {		    
-                    nodejs('DAGNodeJS'){
-                          sh 'npm install'
-                          sh 'cp  index.d.ts ./node_modules/@types/chart.js'
-                    }
-            }
-        }
-        stage('Build') {
-            steps {
-                    nodejs('DAGNodeJS'){
-                        sh 'npm run-script build'
-                    }
-            }
-        }
-	stage ("Code Analysis") {	   
-            steps {	
-		    script{
-			    def scannerHome = tool 'DAGSonarScanner'
-		    }
-	            withSonarQubeEnv('SonarQube') {    
-	            sh 'pwd'
-	            sh 'cp sonar-scanner.properties /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
-		    sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'	            		   
-		   }
-            }
-        }
-	stage("Quality Check"){
-           steps{
-	           script{
-      			   def qualitygate = waitForQualityGate()
-      			   if (qualitygate.status != "OK") {
-         		        error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-			   }
-	     	    }
-            }
-       }
-       stage('Building Image') {
+        stage('Building Image') {
             steps {
                    script {
                             dockerImage = docker.build registry + ":$BUILD_NUMBER"
