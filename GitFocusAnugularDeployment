@@ -1,0 +1,35 @@
+pipeline {
+  environment {
+    registry = "priya2802/gitfocus_service_kube"
+    registryCredential = 'GITFocus-DockerHub'
+    dockerImage = ''
+  }
+ 
+  agent any
+  tools { 
+    maven 'maven 3.6.3' 
+  }	
+ 
+  stages {
+          stage ("Build Service") {
+               steps {
+	                    build 'GitFocus-Angular-Build'
+                }  
+          }  
+          stage('Approval') {            
+               steps {
+                    script {
+		                          timeout (time: 2, unit: 'MINUTES') {
+                                      def deploymentDelay = input id: 'Deploy', message: 'Push Image to DockerHub?', submitter: 'admin', parameters: [choice(choices: ['0', '1', '2', '3'], description: 'Hours to delay deployment?', name: 'deploymentDelay')]
+                                     sleep time: deploymentDelay.toInteger(), unit: 'HOURS'
+		                          }
+                     }
+                }    
+           }
+           stage ("Deployment") {
+               steps {
+	                    build 'K8Test'
+                }  
+          } 
+   }
+}
