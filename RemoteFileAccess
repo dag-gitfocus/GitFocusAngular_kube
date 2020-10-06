@@ -4,9 +4,9 @@ pipeline {
         stage('SSH Declarative') {
             steps {
                  script {
-                     withCredentials([sshUserPrivateKey(credentialsId: 'AWSK8', keyFileVariable: '', passphraseVariable: '', usernameVariable: '')]) {
-                        def remote = [name: 'K8 Cluster Invoke', host: 'ec2-13-53-42-78.eu-north-1.compute.amazonaws.com', keyFileVariable: 'Identity', user: 'ubuntu', allowAnyHosts: true]
-                        sshCommand remote: remote, command: "ls -l"
+                     withCredentials([sshUserPrivateKey(credentialsId: 'AWSK8', keyFileVariable: 'KEY', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
+                        def remote = [name: 'K8 Cluster Invoke', host: 'ec2-13-53-42-78.eu-north-1.compute.amazonaws.com', identityFile : 'KEY', user: 'ubuntu', allowAnyHosts: true]
+                        sshCommand remote: remote, command: "ls -l" 
                      }
                  }
             }
