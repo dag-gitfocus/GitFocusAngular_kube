@@ -25,7 +25,7 @@ pipeline {
         stage('Push to DockerHub') {
             steps{
                   script {
-                           // docker.withRegistry( '', registryCredential ) {
+                            docker.withRegistry( '', registryCredential ) {
                            // dockerImage.push()
                            }
                   }
@@ -35,9 +35,9 @@ pipeline {
     post {
           always {
 		  cleanWs()
-	           //emailext body:'''${DEFAULT_CONTENT}''',
-                   //         recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                   //        subject:''' ${DEFAULT_SUBJECT}'''
+	           emailext body:'''${DEFAULT_CONTENT}''',
+                           recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                           subject:''' ${DEFAULT_SUBJECT}'''
          }  
    }
 }
