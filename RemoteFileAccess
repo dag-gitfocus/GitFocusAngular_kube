@@ -13,8 +13,8 @@ pipeline {
                      sshCommand remote: remote, command: "ls -l"   
                      sshPut remote: remote, from: './AngularDeployment.yaml', into: './gitfocusapp'
                      sshPut remote: remote, from: './AngularLoadBalService.yaml', into: './gitfocusapp'
-                     sshCommand remote: remote, command: "kubectl create -f AngularDeployment.yaml"
-                     sshCommand remote: remote, command: "kubectl create -f AngularLoadBalService.yaml"
+                     sshCommand remote: remote, command: "kubectl create -f ./gitfocusapp/AngularDeployment.yaml"
+                     sshCommand remote: remote, command: "kubectl create -f ./gitfocusapp/AngularLoadBalService.yaml"
                      }
                  }
             }
