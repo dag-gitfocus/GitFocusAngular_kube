@@ -25,7 +25,7 @@ pipeline {
 	                 withSonarQubeEnv('DAG_Sonar') {    
 	                       sh 'pwd'
 	                       sh 'cp sonar-scanner.properties /var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/DAG_SonarQubeScanner/conf'
-		                     sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/DAG_SonarQubeScanner/bin'	            		   
+		                     sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/DAG_SonarQubeScanner/bin/sonar-scanner'	            		   
 		               }
             }
         }
