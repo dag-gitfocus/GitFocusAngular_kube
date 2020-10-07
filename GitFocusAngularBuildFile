@@ -2,7 +2,7 @@ pipeline {
 
    agent any	
    stages {
-        stage('Initialize'){
+         /* stage('Initialize'){
             steps {		    
                     nodejs('DAG_NodeJS'){
                           sh 'npm install'
@@ -10,13 +10,13 @@ pipeline {
                     }
             }
         }
-        stage('Build') {
+       stage('Build') {
             steps {
                     nodejs('DAG_NodeJS'){
                         sh 'npm run-script build'
                     }
             }
-        }
+        } */
 	      stage ("Code Analysis") {	   
             steps {	
 		               script{
@@ -28,7 +28,7 @@ pipeline {
 		                     sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/DAG_SonarQubeScanner/bin/sonar-scanner'	            		   
 		               }
             }
-        }
+        } 
 	      stage("Quality Check"){
             steps{
 	                script{
