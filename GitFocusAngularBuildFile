@@ -8,7 +8,7 @@ pipeline {
    stages {
         stage('Initialize'){
             steps {		    
-                    nodejs('DAGNodeJS'){
+                    nodejs('GitFocus_CodeBuild_NodeJS'){
                           sh 'npm install'
                           sh 'cp  index.d.ts ./node_modules/@types/chart.js'
                     }
@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                    nodejs('DAGNodeJS'){
+                    nodejs('GitFocus_CodeBuild_NodeJS'){
                         sh 'npm run-script build'
                     }
             }
@@ -24,9 +24,9 @@ pipeline {
 	      stage ("Code Analysis") {	   
             steps {	
 		               script{
-			                     def scannerHome = tool 'DAGSonarScanner'
+			                     def scannerHome = tool 'GitFocus_CodeBuild_Scanner'
 		               }
-	                 withSonarQubeEnv('SonarQube') {    
+	                 withSonarQubeEnv('GitFocus_CodeBuild_ScannerQube') {    
 	                       sh 'pwd'
 	                       sh 'cp sonar-scanner.properties /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
 		                     sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'	            		   
