@@ -1,14 +1,10 @@
 pipeline {
-    environment {
-    registry = "priya2802/gitfocus_service_kube"
-    registryCredential = 'GITFocus-DockerHub'
-    dockerImage = ''
-  }
+
    agent any	
    stages {
         stage('Initialize'){
             steps {		    
-                    nodejs('GitFocus_CodeBuild_NodeJS'){
+                    nodejs('DAG_NodeJS'){
                           sh 'npm install'
                           sh 'cp  index.d.ts ./node_modules/@types/chart.js'
                     }
@@ -16,7 +12,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                    nodejs('GitFocus_CodeBuild_NodeJS'){
+                    nodejs('DAG_NodeJS'){
                         sh 'npm run-script build'
                     }
             }
@@ -24,9 +20,9 @@ pipeline {
 	      stage ("Code Analysis") {	   
             steps {	
 		               script{
-			                     def scannerHome = tool 'GitFocus_CodeBuild_Scanner'
+			                     def scannerHome = tool 'DAG_SonarQubeScanner'
 		               }
-	                 withSonarQubeEnv('GitFocus_CodeBuild_ScannerQube') {    
+	                 withSonarQubeEnv('DAG_Sonar') {    
 	                       sh 'pwd'
 	                       sh 'cp sonar-scanner.properties /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
 		                     sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'	            		   
