@@ -1,0 +1,61 @@
+pipeline {
+  environment {
+    registry = "priya2802/gitfocus_service_kube"
+    registryCredential = 'GITFocus-DockerHub'
+    dockerImage = ''
+  }
+ 
+  agent any
+  tools { 
+    maven 'maven 3.6.3' 
+  }	
+ 
+  stages {
+          stage ("Build Project") {
+               steps {
+	                    build 'GitFocus-Angular-Build'
+                }  
+          } 
+	  stage ("Push Image") {
+               steps {
+	                    build 'GitFocus-Angular-BuildImage'
+                }  
+          }  
+          stage('Approval') {            
+               steps {
+                    script {
+		                          timeout (time: 2, unit: 'MINUTES') {
+                                      def deploymentDelay = input id: 'Deploy', message: 'Push Image to DockerHub?', submitter: 'admin', parameters: [choice(choices: ['0', '1', '2', '3'], description: 'Hours to delay deployment?', name: 'deploymentDelay')]
+                                     sleep time: deploymentDelay.toInteger(), unit: 'HOURS'
+		                          }
+                     }
+                }    
+           }
+           stage('Deploy in Cluster') {
+            steps {
+                 script {
+                     withCredentials([sshUserPrivateKey(credentialsId: 'AWSK8', keyFileVariable: 'keyFile', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
+                     echo keyFile
+                     print 'keyFile=' + keyFile
+                     print 'keyFileContent=' + readFile(keyFile)
+                     def remote = [name: 'K8 Cluster Invoke', host: 'ec2-13-53-42-78.eu-north-1.compute.amazonaws.com', identityFile : keyFile, user: 'ubuntu', allowAnyHosts: true]
+                     sh 'ls -l'
+                     sshCommand remote: remote, command: "ls -l"   
+                     sshPut remote: remote, from: './AngularDeployment.yaml', into: './gitfocusapp'
+                     sshPut remote: remote, from: './AngularLoadBalService.yaml', into: './gitfocusapp'
+                     sshCommand remote: remote, command: "kubectl create -f ./gitfocusapp/AngularDeployment.yaml"
+                     sshCommand remote: remote, command: "kubectl create -f ./gitfocusapp/AngularLoadBalService.yaml"
+                     }
+                 }
+            }
+        }
+   }
+    post {
+          always {
+		  cleanWs()
+	           /*emailext body:'''${DEFAULT_CONTENT}''',
+                           recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                           subject:''' ${DEFAULT_SUBJECT}'''*/
+         }  
+   }
+}
