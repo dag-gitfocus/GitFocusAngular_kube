@@ -23,13 +23,15 @@ pipeline {
         }*/
 	stage ("Code Analysis") {	   
             steps {
-	             def scannerHome=tool 'DAGSonarQubeScanner'
-		     withSonarQubeEnv('SonarQube') {    
-	                    sh 'pwd'  
-	                    //sh 'cp sonar-scanner.properties /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
-		            //sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'	            		   
-		            sh "${scannerHome}/bin/sonar-scanner"
-		     }
+	            script {
+	                      def scannerHome=tool 'DAGSonarQubeScanner'
+		              withSonarQubeEnv('SonarQube') {    
+	                         sh 'pwd'  
+	                         //sh 'cp sonar-scanner.properties /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
+		                 //sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'	            		   
+		                 sh "${scannerHome}/bin/sonar-scanner"
+	                      }
+		    }
             }
         }
 	stage("Quality Check"){
