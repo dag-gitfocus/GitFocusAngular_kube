@@ -6,7 +6,7 @@ pipeline {
   }
    agent any	
    stages {
-       /* stage('Initialize'){
+       stage('Initialize'){
             steps {		    
                     nodejs('DAGNodeJS'){
                           sh 'npm install'
@@ -20,7 +20,7 @@ pipeline {
                         sh 'npm run-script build'
                     }
             }
-        }*/
+        }
 	stage ("Code Analysis") {	   
             steps {
 	            script {
