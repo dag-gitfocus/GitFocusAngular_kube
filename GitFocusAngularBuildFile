@@ -6,7 +6,7 @@ pipeline {
   }
    agent any	
    stages {
-        stage('Initialize'){
+       /* stage('Initialize'){
             steps {		    
                     nodejs('DAGNodeJS'){
                           sh 'npm install'
@@ -20,21 +20,19 @@ pipeline {
                         sh 'npm run-script build'
                     }
             }
-        }
-	      stage ("Code Analysis") {	   
-            steps {	
-		               script{
-			                     def scannerHome = tool 'DAGSonarQubeScanner'
-		               }
-	                 withSonarQubeEnv('SonarQube') {    
-	                             sh 'pwd'  
-	                             //sh 'cp sonar-scanner.properties /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
-		                     //sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'	            		   
-				     sh "${scannerHome}/bin/sonar-scanner"
-		               }
+        }*/
+	stage ("Code Analysis") {	   
+            steps {
+	             def scannerHome=tool 'DAGSonarQubeScanner'
+		     withSonarQubeEnv('SonarQube') {    
+	                    sh 'pwd'  
+	                    //sh 'cp sonar-scanner.properties /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/conf'
+		            //sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner'	            		   
+		            sh "${scannerHome}/bin/sonar-scanner"
+		     }
             }
         }
-	      stage("Quality Check"){
+	stage("Quality Check"){
             steps{
 	                script{
       			               def qualitygate = waitForQualityGate()
