@@ -1,7 +1,7 @@
 pipeline {
     environment {
-    registry = "priya2802/gitfocus_service_kube"
-    registryCredential = 'GITFocus-DockerHub'
+    registry = "daggitfocus/gitfocus_angular_kube"
+    registryCredential = 'GitFocus_Docker_ID'
     dockerImage = ''
   }
    agent any	
@@ -26,7 +26,10 @@ pipeline {
             steps{
                   script {
                             docker.withRegistry( '', registryCredential ) {
-                           // dockerImage.push()
+                            dockerImage.push()
+                            
+                            // dockerImage.push()+ ':${BUILD_NUMBER}'
+                            
                            }
                   }
              }
