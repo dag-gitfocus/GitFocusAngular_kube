@@ -2,7 +2,7 @@ pipeline {
 
    agent any	
    stages {
-         stage('Initialize'){
+         /* stage('Initialize'){
             steps {		    
                     nodejs('DAG_NodeJS'){
                           sh 'npm install'
@@ -16,7 +16,7 @@ pipeline {
                         sh 'npm run-script build'
                     }
             }
-        } 
+        } */
 	      stage ("Code Analysis") {	   
             steps {	
 		               script{
@@ -29,7 +29,7 @@ pipeline {
 		               }
             }
         } 
-	      stage("Quality Check"){
+	     /* stage("Quality Check"){
             steps{
 	                script{
       			               def qualitygate = waitForQualityGate()
@@ -38,7 +38,7 @@ pipeline {
 			                     }
 	     	          }
             }
-        }
+        } */
     }
     post {
           always {
