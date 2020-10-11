@@ -41,7 +41,7 @@ pipeline {
                      sshCommand remote: remote, command: "kubectl create -f ./gitfocusapp/AngularLoadBalService.yaml"
                      
                      // set docker image tag
-                     sh 'kubectl set image deployments gitui-deployment gitui-container=gitui-deployment:${BUILD_NUMBER}'
+                    // sh 'kubectl set image deployments gitui-deployment gitui-container=gitui-deployment:${BUILD_NUMBER}'
                      
                      }
                  }
