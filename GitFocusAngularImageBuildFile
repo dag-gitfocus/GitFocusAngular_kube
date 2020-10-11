@@ -1,11 +1,8 @@
 pipeline {
     environment {
-    NAME = "gitfocus_angular"
-    VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
-   	IMAGE = "${NAME}:${VERSION}"
-    registry = "daggitfocus/gitfocus_angular_kube"
+    registry = "daggitfocus/gitfocus_angular_kube:v1"
     registryCredential = 'GitFocus_Docker_ID'
-    // dockerImage = ''
+    dockerImage = ''
   }
    agent any	
    stages {
@@ -14,10 +11,7 @@ pipeline {
 	            sh 'pwd'
 	            sh 'ls -l'
                    script {
-                            echo "Running ${VERSION} on ${env.JENKINS_URL}"
-                             sh "docker build -t ${NAME} ."
-            				 sh "docker tag ${NAME}:latest ${NAME}:${VERSION}"
-                            // dockerImage = docker.build registry + angularimage:1
+                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
                             // dockerImage = docker.build registry + ":1.1"
                    }
             }           
