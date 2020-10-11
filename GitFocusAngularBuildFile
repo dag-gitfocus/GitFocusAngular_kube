@@ -18,7 +18,7 @@ pipeline {
             }
         } 
         
-       
+      /* 
 	  stage ("Code Analysis") {	   
             steps {	
 		               script{
@@ -30,7 +30,7 @@ pipeline {
 		               }
             }
         } 
-        
+        */
         
 	      stage("Quality Check"){
             steps{
