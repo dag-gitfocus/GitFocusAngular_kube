@@ -1,6 +1,6 @@
 pipeline {
     environment {
-    registry = "daggitfocus/gitfocus_angular_kube:v1"
+    registry = "daggitfocus/gitfocus_angular_kube"
     registryCredential = 'GitFocus_Docker_ID'
     dockerImage = ''
   }
@@ -12,7 +12,6 @@ pipeline {
 	            sh 'ls -l'
                    script {
                             dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                            // dockerImage = docker.build registry + ":1.1"
                    }
             }           
         }	
@@ -27,7 +26,6 @@ pipeline {
                   script {
                             docker.withRegistry( '', registryCredential ) {
                             dockerImage.push()
-                            
                             dockerImage.push()+ ':${BUILD_NUMBER}'
                             
                            }

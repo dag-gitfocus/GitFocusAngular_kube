@@ -16,6 +16,7 @@ spec:
             containers:
             - name: gitui-container
               image: daggitfocus/gitfocus_angular_kube
+              imagePullPolicy: "Always"
               ports:
               - containerPort: 4200  
     replicas: 3

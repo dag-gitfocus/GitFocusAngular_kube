@@ -39,9 +39,7 @@ pipeline {
                      sshPut remote: remote, from: './AngularLoadBalService.yaml', into: './gitfocusapp'
                      sshCommand remote: remote, command: "kubectl create -f ./gitfocusapp/AngularDeployment.yaml"
                      sshCommand remote: remote, command: "kubectl create -f ./gitfocusapp/AngularLoadBalService.yaml"
-                     
-                     // set docker image tag
-                    // sh 'kubectl set image deployments gitui-deployment gitui-container=gitui-deployment:${BUILD_NUMBER}'
+                     sshCommand remote: remote, command: "kubectl set image deployment/gitui-deployment gitui-container=gitui-deployment:$BUILD_NUMBER"
                      
                      }
                  }
