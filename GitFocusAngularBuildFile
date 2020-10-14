@@ -32,7 +32,7 @@ pipeline {
         } 
         
         
-	   /*   stage("Quality Check"){
+	      stage("Quality Check"){
             steps{
 	                script{
       			               def qualitygate = waitForQualityGate()
@@ -41,7 +41,7 @@ pipeline {
 			                     }
 	     	          }
             }
-        } */
+        } 
     }
     post {
           always {
