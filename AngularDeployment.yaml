@@ -16,7 +16,7 @@ spec:
         spec:
             containers:
             - name: gitui-container
-              image: daggitfocus/gitfocus_angular
+              image: daggitfocus/gitfocus_angular_kube
               imagePullPolicy: "Always"
               ports:
               - containerPort: 4200  
