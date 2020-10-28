@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: gitui-deployment
-    namespace: gitfocus
     labels:
         app: gitui
         type: frontend
