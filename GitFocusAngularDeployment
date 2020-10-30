@@ -28,7 +28,7 @@ pipeline {
            stage('Deploy in Cluster') {
             steps {
                  script {
-                     withCredentials([string(credentialsId: 'ArgoCD_Token', keyFileVariable: 'keyFile', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
+                     withCredentials([string(credentialsId: 'ArgoCD_Token_Gitfocus', variable: 'ArgoCD_Token')]) {
                      echo keyFile
                      print 'keyFile=' + keyFile
                      print 'keyFileContent=' + readFile(keyFile)
