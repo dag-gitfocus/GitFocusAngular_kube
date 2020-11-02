@@ -19,6 +19,9 @@ spec:
               imagePullPolicy: Always
               ports:
               - containerPort: 4200  
+            syncPolicy:
+              automated:
+              prune: true
     replicas: 3
     selector: 
         matchLabels:
