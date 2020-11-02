@@ -18,10 +18,7 @@ spec:
               image: priya2802/gitangular_kube
               imagePullPolicy: Always
               ports:
-              - containerPort: 4200  
-            syncPolicy:
-              automated:
-              prune: true
+              - containerPort: 4200
     replicas: 3
     selector: 
         matchLabels:
