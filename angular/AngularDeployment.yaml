@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: gitui-deployment
+    name: gitui-dep
     labels:
         app: gitui
         type: frontend
@@ -16,6 +16,7 @@ spec:
             containers:
             - name: gitui-container
               image: priya2802/gitangular_kube
+              imagePullPolicy: Always
               ports:
               - containerPort: 4200  
     replicas: 3
