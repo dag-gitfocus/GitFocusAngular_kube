@@ -15,7 +15,7 @@ spec:
         spec:
             containers:
             - name: gitui-container
-              image: 792429589635.dkr.ecr.ap-south-1.amazonaws.com/gitfocus
+              image: 792429589635.dkr.ecr.ap-south-1.amazonaws.com/gitfocus:latest
               ports:
               - containerPort: 4200  
     replicas: 3
