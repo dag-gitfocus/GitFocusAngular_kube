@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: postgresql
+spec:
+    template:
+        metadata:
+            name: app-db
+            labels:
+                app: app-db1
+                tier: backend
+        spec:
+            containers:
+            - name: postgresql
+              image: priya2802/ps_postgres
+              ports:
+              - containerPort: 5432
+    replicas: 1
+    selector:
+        matchLabels:
+            app: app-db1
+            tier: backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql
+spec:
+  selector:
+    app: app-db1
+    tier: backend
+  ports:
+  - port: 5432
