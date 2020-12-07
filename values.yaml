@@ -2,16 +2,20 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+appname: gitfocus
+replicaCount: 3
 
 image:
-  repository: 792429589635.dkr.ecr.ap-south-1.amazonaws.com/gitfocus:latest
-  tag: 0.1
+  repository: 792429589635.dkr.ecr.ap-south-1.amazonaws.com/gitfocus
+  tag: latest
   pullPolicy: IfNotPresent
 
 service:
-  type: ClusterIP
-  port: 80
+  type: NodePort
+  port: 8080
+  targetport: 8080
+  nodeport: 31228
+  servicename: gitfocus-angular
 
 ingress:
   enabled: false
