@@ -12,7 +12,7 @@ spec:
         spec:
             containers:
             - name: gitservice-container
-              image: priya2802/gitfocus_service_kube
+              image: priya2802/gitfocus_service_cicd
               ports:
               - containerPort: 8888
     replicas: 3
