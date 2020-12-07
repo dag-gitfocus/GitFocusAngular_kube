@@ -1,12 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "helm-gitfocus.fullname" . }}
+  name: {{ include "gitfocus.fullname" . }}
   labels:
-    app: {{ template "helm-gitfocus.name" . }}
-    chart: {{ template "helm-gitfocus.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    {{- include "gitfocus.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -15,5 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "helm-gitfocus.name" . }}
-    release: {{ .Release.Name }}
+    {{- include "gitfocus.selectorLabels" . | nindent 4 }}
