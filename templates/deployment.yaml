@@ -40,11 +40,13 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 10    
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: 80
             initialDelaySeconds: 2
             periodSeconds: 10  
           resources:
