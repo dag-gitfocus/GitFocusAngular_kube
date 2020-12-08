@@ -41,14 +41,14 @@ spec:
             httpGet:
               path: /
               port: 80
-            initialDelaySeconds: 3
-            periodSeconds: 10    
+            initialDelaySeconds: 60
+            periodSeconds: 120    
           readinessProbe:
             httpGet:
               path: /
               port: 80
-            initialDelaySeconds: 2
-            periodSeconds: 10  
+            initialDelaySeconds: 60
+            periodSeconds: 120  
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
