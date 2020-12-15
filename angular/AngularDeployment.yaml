@@ -20,7 +20,7 @@ spec:
               - containerPort: 4200  
     replicas: 3
     selector: 
-        matchLabels:
+        matchLabels: 
             type: frontend
 ---
 apiVersion: v1
